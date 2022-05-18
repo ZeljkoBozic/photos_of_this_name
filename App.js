@@ -10,6 +10,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { Counter } from './components/counter/Counter';
+import { ContactsView } from './components/contacts/ContactsView';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -79,6 +80,7 @@ const App = () => {
             Edit <Text style={styles.highlight}>App.js</Text> to change this
             screen and then come back to see your edits.
           </Section> */}
+           <ContactsView/>
            <Counter />
           <Section title="See Your Changes">
             <ReloadInstructions />
