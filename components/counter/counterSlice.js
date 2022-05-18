@@ -23,8 +23,9 @@ export const incrementAsync = createAsyncThunk(
 
 export const getImages = createAsyncThunk(
   'counter/getFlickrImages',
-  async () => {
-    const response = await getFlickrImages();
+  async ({searchTag, pageNumber}) => {
+    console.log("$$$$ gde je ovo", searchTag, pageNumber)
+    const response = await getFlickrImages(searchTag, pageNumber);
     // The value we return becomes the `fulfilled` action payload
     console.log('### response ', response)
     return response.photo;
