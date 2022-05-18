@@ -7,10 +7,13 @@
  */
 
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import { Counter } from './components/counter/Counter';
-import { ContactsView } from './components/contacts/ContactsView';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import {Provider} from 'react-redux';
+import {store} from './app/store';
+import {Counter} from './components/counter/Counter';
+import {ContactsView} from './components/contacts/ContactsView';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -19,6 +22,7 @@ import {
   StyleSheet,
   Text,
   useColorScheme,
+  Button,
   View,
 } from 'react-native';
 
@@ -29,6 +33,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+const Stack = createNativeStackNavigator();
 
 const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -56,16 +62,21 @@ const Section = ({children, title}) => {
   );
 };
 
-const App = () => {
+const ImageListView = ({navigation, route}) => {
+  return (
+    <View>
+      <Text>Image list view</Text>
+    </View>
+  );
+};
 
+const HomeScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   return (
-    <Provider store={store}> 
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
@@ -77,11 +88,20 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           {/* <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section> */}
-           <ContactsView/>
-           <Counter />
+          Edit <Text style={styles.highlight}>App.js</Text> to change this
+          screen and then come back to see your edits.
+        </Section> */}
+          <ContactsView />
+          <Counter />
+          <Button
+            title={`Go to image list`}
+            onPress={() => {
+              navigation.navigate(
+                'ImageList',
+                //  {name: 'Jane'}
+              );
+            }}
+          />
           <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
@@ -95,7 +115,29 @@ const App = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
-    </Provider > 
+  );
+};
+
+const App = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{title: 'Welcome'}}
+          />
+          <Stack.Screen name="ImageList" component={ImageListView} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
