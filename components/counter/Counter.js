@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   SafeAreaView,
@@ -8,6 +8,7 @@ import {
   Text,
   useColorScheme,
   TouchableHighlight,
+  Image,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -16,12 +17,15 @@ import {
   increment,
   incrementByAmount,
   incrementAsync,
+  getImages,
   incrementIfOdd,
   selectCount,
+  selectPhotos,
 } from './counterSlice';
 
 export function Counter() {
   const count = useSelector(selectCount);
+  const photos = useSelector(selectPhotos);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
 
@@ -29,26 +33,41 @@ export function Counter() {
 
   const onSetIncrement = () => setIncrementAmount(prevCount => prevCount + 1);
 
-  const onPress = () => dispatch(increment());
+  // const onPress = () => dispatch(increment());
+  const onPress = () => dispatch(getImages());
   const onOdd = () => dispatch(incrementIfOdd(incrementValue));
+
+  useEffect(() => {
+    console.log('### photos', photos);
+  });
 
   return (
     <View>
       <View style={styles.container}>
-        <View style={styles.countContainer}>
-          <Text>Count: {count}</Text>
-        </View>
+        <View style={styles.countContainer}></View>
+        {photos[0] ? (
+          <View>
+            <Image
+              source={{
+                uri: `https://live.staticflickr.com/${photos[0].server}/${photos[0].id}_${photos[0].secret}_m.jpg`,
+              }}
+              style={{width: 120, height: 120}}
+            />
+            <Text>{photos[0].ownername}</Text>
+            <Text>{photos[0].datetaken}</Text>
+            <Text>{photos[0].description._content}</Text>
+          </View>
+        ) : null}
+
         <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text>redux increment</Text>
+          <Text>get images</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
         <View style={styles.countContainer}>
           <Text>Count: {count}</Text>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onOdd}>
+        <TouchableOpacity style={styles.button} onPress={onOdd}>
           <Text>redux on odd</Text>
         </TouchableOpacity>
       </View>
