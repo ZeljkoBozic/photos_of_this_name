@@ -5,9 +5,29 @@ export function fetchCount(amount = 1) {
   );
 }
 
+
+
 export const getFlickrImages = async (searchTag, pageNumber) => {
-  console.log('### tag pgNum', searchTag, pageNumber)
-  const flickrURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=9077ed96f15f70a86798aca3402a9f5a&tags=${searchTag}&extras=owner_name%2C+date_taken%2C+description&page=${pageNumber}&format=json&nojsoncallback=1&auth_token=72157720843817160-d931fd5430d42d37&api_sig=8aac62cae914a1b9fd4b11d0ee7eabf3`
+  // console.log('### tag pgNum', searchTag, pageNumber)
+
+  const apiKey = '63c1305a88cdb1f8f1354bfb8615e8f1';
+
+  const data = {
+    method: 'flickr.photos.search',
+    api_key: apiKey,
+    tags: searchTag,
+    sort: 'interestingness-desc',
+    per_page: 12,
+    page: pageNumber,
+    extras: 'owner_name, date_taken, description',
+    format: 'json',
+    nojsoncallback: 1,
+  };
+
+  const parameters = new URLSearchParams(data);
+
+  const flickrURL = `https://api.flickr.com/services/rest/?${parameters}`
+  // console.log('### url ', flickrURL)
 
   try {
     const response = await fetch(flickrURL);

@@ -34,7 +34,7 @@ export function Counter() {
   const onSetIncrement = () => setIncrementAmount(prevCount => prevCount + 1);
 
   // const onPress = () => dispatch(increment());
-  const onPress = () => dispatch(getImages({searchTag: "cats", pageNumber: "44"}));
+  const onPress = () => dispatch(getImages({searchTag: "horse", pageNumber: "2"}));
   const onOdd = () => dispatch(incrementIfOdd(incrementValue));
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export function Counter() {
             <Text>{photos[0].ownername}</Text>
             <Text>{photos[0].datetaken}</Text>
             <Text>{photos[0].description._content}</Text>
+            {/* <Text>{ `https://live.staticflickr.com/${photos[1].server}/${photos[1].id}_${photos[1].secret}_m.jpg`}</Text> */}
             <Image
               source={{
                 uri: `https://live.staticflickr.com/${photos[1].server}/${photos[1].id}_${photos[1].secret}_m.jpg`,
