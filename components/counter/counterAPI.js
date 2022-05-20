@@ -1,9 +1,9 @@
 // A mock function to mimic making an async request for data
-export function fetchCount(amount = 1) {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500)
-  );
-}
+// export function fetchCount(amount = 1) {
+//   return new Promise((resolve) =>
+//     setTimeout(() => resolve({ data: amount }), 500)
+//   );
+// }
 
 
 
@@ -17,7 +17,7 @@ export const getFlickrImages = async (searchTag, pageNumber) => {
     api_key: apiKey,
     tags: searchTag,
     sort: 'interestingness-desc',
-    per_page: 12,
+    per_page: 15,
     page: pageNumber,
     extras: 'owner_name, date_taken, description',
     format: 'json',
