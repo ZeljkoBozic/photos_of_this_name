@@ -28,6 +28,7 @@ const SearchBar = (props) => {
             title="Cancel"
             onPress={() => {
               Keyboard.dismiss();
+              props.setSearchPhrase('')
               props.setClicked(false);
             }}
           ></Button>

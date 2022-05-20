@@ -12,23 +12,37 @@ import {
 
 import {getImages, selectPhotos} from '../counter/counterSlice';
 
-const ImageListView = ({route, navigation}) => {
+const ImageListView = ({route}) => {
   const {nameTag} = route.params;
   const dispatch = useDispatch();
   const flickrImages = useSelector(selectPhotos);
 
   const [images, setImages] = useState([]);
+  const [page, setPage] = useState(1)
+
   useEffect(() => {
-    dispatch(getImages({searchTag: nameTag, pageNumber: '2'}));
+    dispatch(getImages({searchTag: nameTag, pageNumber: page}));
   }, []);
 
   useEffect(() => {
-    setImages(flickrImages);
+    if(images.length === 0){
+      setImages(flickrImages);
+    }
+
   }, [flickrImages]);
 
   const keyExtractor = item => {
-    return item?.id?.toString();
+    return item.id.toString()
   };
+
+  const loadMore = () => {
+    dispatch(getImages({searchTag: nameTag, pageNumber: page + 1}));
+    setPage(page + 1)
+    setImages([...images, ...flickrImages])
+  }
+
+
+
   const renderItem = ({item}) => {
     const {title, description, dateTaken} = item;
     const url = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
@@ -40,19 +54,16 @@ const ImageListView = ({route, navigation}) => {
             <Text style={styles.sectionTitle}>{title || 'No Title'}</Text>
             <Text style={styles.sectionDate}>{dateTaken || '-'}</Text>
           </View>
-          <View style={{ flex: 1}}>
-          <TouchableHighlight onPress={() => Linking.openURL(url)}>
-            <Image
-              source={{
-                uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`,
-              }}
-              style={{width: 120, height: 120}}
-            />
-          </TouchableHighlight>
-
+          <View style={{flex: 1}}>
+            <TouchableHighlight onPress={() => Linking.openURL(url)}>
+              <Image
+                source={{
+                  uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`,
+                }}
+                style={{width: 120, height: 120}}
+              />
+            </TouchableHighlight>
           </View>
-
-
         </View>
 
         <View>
@@ -69,6 +80,8 @@ const ImageListView = ({route, navigation}) => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       style={styles.list}
+      onEndReached={loadMore}
+      onEndReachedThreshold ={0.5}
     />
   );
 };
