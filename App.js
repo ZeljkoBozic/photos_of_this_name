@@ -15,6 +15,7 @@ import {store} from './app/store';
 import {Counter} from './components/counter/Counter';
 import ContactsView from './components/contacts/ContactsView';
 import ImageListView from './components/images/ImagesListView';
+import SearchView from './components/search/SearchView';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -113,6 +114,15 @@ const HomeScreen = ({navigation}) => {
               );
             }}
           />
+          <Button
+            title={`Search`}
+            onPress={() => {
+              navigation.navigate(
+                'Search',
+                //  {name: 'Jane'}
+              );
+            }}
+          />
           {/* <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
@@ -130,7 +140,6 @@ const HomeScreen = ({navigation}) => {
 };
 
 const App = () => {
-
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -149,6 +158,11 @@ const App = () => {
             name="ImageList"
             component={ImageListView}
             options={{title: 'Image List'}}
+          />
+          <Stack.Screen
+            name="Search"
+            component={SearchView}
+            options={{title: 'Search'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -5,7 +5,9 @@ import {FlatList, View, Text, StyleSheet, Image} from 'react-native';
 // import Contact from './Contact';
 import {getImages, selectPhotos} from '../counter/counterSlice';
 
-const ImageListView = () => {
+const ImageListView = ({route, navigation}) => {
+  const {nameTag} = route.params;
+  console.log('$$$', nameTag);
   const dispatch = useDispatch();
   const flickrImages = useSelector(selectPhotos);
   // return (
@@ -15,7 +17,7 @@ const ImageListView = () => {
   //   );
   const [images, setImages] = useState([]);
   useEffect(() => {
-    dispatch(getImages({searchTag: 'horse', pageNumber: '2'}));
+    dispatch(getImages({searchTag: nameTag, pageNumber: '2'}));
   }, []);
 
   useEffect(() => {
@@ -39,15 +41,13 @@ const ImageListView = () => {
             style={{width: 120, height: 120}}
           />
           <View>
-          <Text style={styles.sectionTitle}>{title}</Text>
-          <Text style={styles.sectionDescription}>{dateTaken}</Text>
+            <Text style={styles.sectionTitle}>{title}</Text>
+            <Text style={styles.sectionDescription}>{dateTaken}</Text>
           </View>
         </View>
 
         <View>
-          
           <Text style={styles.sectionDescription}>{description._content}</Text>
-          
         </View>
       </View>
     );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
     paddingHorizontal: 8,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   sectionTitle: {
     fontSize: 18,
