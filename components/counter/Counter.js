@@ -50,15 +50,15 @@ export function Counter() {
   const count = useSelector(selectCount);
   const photos = useSelector(selectPhotos);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  // const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+  // const incrementValue = Number(incrementAmount) || 0;
 
-  const onSetIncrement = () => setIncrementAmount(prevCount => prevCount + 1);
+  // const onSetIncrement = () => setIncrementAmount(prevCount => prevCount + 1);
 
   // const onPress = () => dispatch(increment());
   const onPress = () => dispatch(getImages({searchTag: "horse", pageNumber: "2"}));
-  const onOdd = () => dispatch(incrementIfOdd(incrementValue));
+  // const onOdd = () => dispatch(incrementIfOdd(incrementValue));
 
   useEffect(() => {
     console.log('### photos', photos);
@@ -71,17 +71,17 @@ export function Counter() {
         {photos.length > 1 ? (
           <View>
             <OpenURLButton url={`https://live.staticflickr.com/${photos[1].server}/${photos[1].id}_${photos[1].secret}.jpg`}>Open Image URL</OpenURLButton>
-            <Image
+            {/* <Image
               source={{
                 uri: `https://live.staticflickr.com/${photos[0].server}/${photos[0].id}_${photos[0].secret}_m.jpg`,
               }}
               style={{width: 120, height: 120}}
-            />
-            <Text>{photos[0].ownername}</Text>
+            /> */}
+            {/* <Text>{photos[0].ownername}</Text>
             <Text>{photos[0].datetaken}</Text>
-            <Text>{photos[0].description._content}</Text>
+            <Text>{photos[0].description._content}</Text> */}
             {/* <Text>{ `https://live.staticflickr.com/${photos[1].server}/${photos[1].id}_${photos[1].secret}_m.jpg`}</Text> */}
-            <Image
+            {/* <Image
               source={{
                 uri: `https://live.staticflickr.com/${photos[1].server}/${photos[1].id}_${photos[1].secret}_m.jpg`,
               }}
@@ -89,7 +89,7 @@ export function Counter() {
             />
             <Text>{photos[1].ownername}</Text>
             <Text>{photos[1].datetaken}</Text>
-            <Text>{photos[1].description._content}</Text>
+            <Text>{photos[1].description._content}</Text> */}
           </View>
         ) : null}
 
@@ -97,28 +97,28 @@ export function Counter() {
           <Text>get images</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      {/* <View>
       <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
       <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>
       
       
-      </View>
-      <View style={styles.container}>
+      </View> */}
+      {/* <View style={styles.container}>
         <View style={styles.countContainer}>
           <Text>Count: {count}</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={onOdd}>
           <Text>redux on odd</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.container}>
+      </View> */}
+      {/* <View style={styles.container}>
         <View style={styles.countContainer}>
           <Text>Count: {incrementValue}</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={onSetIncrement}>
           <Text>component state</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }

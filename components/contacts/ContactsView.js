@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import ContactsList from './ContactsList';
+// import Contact from './contact';
 import Contacts from 'react-native-contacts';
 import {
   SafeAreaView,
@@ -12,7 +14,7 @@ import {
   View,
 } from 'react-native';
 
-export function ContactsView() {
+const ContactsView = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -22,13 +24,9 @@ export function ContactsView() {
     });
   }, []);
 
-  return (
-    <View>
-      {contacts.map(contact => (
-        <Text key={contact.recordID}>{contact.givenName}</Text>
-      ))}
-    </View>
-  );
-}
+  return <ContactsList />;
+};
 
 const styles = StyleSheet.create({});
+
+export default ContactsView;

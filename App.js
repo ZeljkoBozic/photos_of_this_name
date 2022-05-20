@@ -13,7 +13,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Provider} from 'react-redux';
 import {store} from './app/store';
 import {Counter} from './components/counter/Counter';
-import {ContactsView} from './components/contacts/ContactsView';
+import ContactsView from './components/contacts/ContactsView';
+import ImageListView from './components/images/ImagesListView';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -36,39 +37,39 @@ import {
 
 const Stack = createNativeStackNavigator();
 
-const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+// const Section = ({children, title}) => {
+//   const isDarkMode = useColorScheme() === 'dark';
+//   return (
+//     <View style={styles.sectionContainer}>
+//       <Text
+//         style={[
+//           styles.sectionTitle,
+//           {
+//             color: isDarkMode ? Colors.white : Colors.black,
+//           },
+//         ]}>
+//         {title}
+//       </Text>
+//       <Text
+//         style={[
+//           styles.sectionDescription,
+//           {
+//             color: isDarkMode ? Colors.light : Colors.dark,
+//           },
+//         ]}>
+//         {children}
+//       </Text>
+//     </View>
+//   );
+// };
 
-const ImageListView = ({navigation, route}) => {
-  return (
-    <View>
-      <Text>Image list view</Text>
-    </View>
-  );
-};
+// const ImageListView = ({navigation, route}) => {
+//   return (
+//     <View>
+//       <Text>Image list view</Text>
+//     </View>
+//   );
+// };
 
 const HomeScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -76,13 +77,14 @@ const HomeScreen = ({navigation}) => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
+        {/* <Header /> */}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -91,7 +93,7 @@ const HomeScreen = ({navigation}) => {
           Edit <Text style={styles.highlight}>App.js</Text> to change this
           screen and then come back to see your edits.
         </Section> */}
-          <ContactsView />
+          {/* <ContactsView /> */}
           <Counter />
           <Button
             title={`Go to image list`}
@@ -102,7 +104,16 @@ const HomeScreen = ({navigation}) => {
               );
             }}
           />
-          <Section title="See Your Changes">
+          <Button
+            title={`Open Contacts`}
+            onPress={() => {
+              navigation.navigate(
+                'ContactsList',
+                //  {name: 'Jane'}
+              );
+            }}
+          />
+          {/* <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
           <Section title="Debug">
@@ -110,8 +121,8 @@ const HomeScreen = ({navigation}) => {
           </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          </Section> */}
+          {/* <LearnMoreLinks /> */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -119,11 +130,6 @@ const HomeScreen = ({navigation}) => {
 };
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
     <Provider store={store}>
@@ -132,9 +138,18 @@ const App = () => {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{title: 'Welcome'}}
+            options={{title: 'Home'}}
           />
-          <Stack.Screen name="ImageList" component={ImageListView} />
+          <Stack.Screen
+            name="ContactsList"
+            component={ContactsView}
+            options={{title: 'Contacts'}}
+          />
+          <Stack.Screen
+            name="ImageList"
+            component={ImageListView}
+            options={{title: 'Image List'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
