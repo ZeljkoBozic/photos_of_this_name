@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {FlatList, View, Text, StyleSheet, Image} from 'react-native';
-// import Contacts from 'react-native-contacts';
-// import Contact from './Contact';
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Linking,
+  TouchableHighlight,
+} from 'react-native';
+
 import {getImages, selectPhotos} from '../counter/counterSlice';
 
 const ImageListView = ({route, navigation}) => {
   const {nameTag} = route.params;
-  console.log('$$$', nameTag);
   const dispatch = useDispatch();
   const flickrImages = useSelector(selectPhotos);
-  // return (
-  //     <View>
-  //       <Text>Image list view</Text>
-  //     </View>
-  //   );
+
   const [images, setImages] = useState([]);
   useEffect(() => {
     dispatch(getImages({searchTag: nameTag, pageNumber: '2'}));
@@ -28,26 +30,35 @@ const ImageListView = ({route, navigation}) => {
     return item?.id?.toString();
   };
   const renderItem = ({item}) => {
-    console.log('### image item ', item);
     const {title, description, dateTaken} = item;
-    // return <Contact contact={item} />;
+    const url = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
+
     return (
       <View>
         <View style={styles.sectionContainer}>
-          <Image
-            source={{
-              uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`,
-            }}
-            style={{width: 120, height: 120}}
-          />
-          <View>
-            <Text style={styles.sectionTitle}>{title}</Text>
-            <Text style={styles.sectionDescription}>{dateTaken}</Text>
+          <View style={{flex: 2}}>
+            <Text style={styles.sectionTitle}>{title || 'No Title'}</Text>
+            <Text style={styles.sectionDate}>{dateTaken || '-'}</Text>
           </View>
+          <View style={{ flex: 1}}>
+          <TouchableHighlight onPress={() => Linking.openURL(url)}>
+            <Image
+              source={{
+                uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`,
+              }}
+              style={{width: 120, height: 120}}
+            />
+          </TouchableHighlight>
+
+          </View>
+
+
         </View>
 
         <View>
-          <Text style={styles.sectionDescription}>{description._content}</Text>
+          <Text style={styles.sectionDescription}>
+            {description._content || 'No description'}
+          </Text>
         </View>
       </View>
     );
@@ -68,9 +79,11 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 8,
+    paddingHorizontal: 30,
     display: 'flex',
+    width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   sectionTitle: {
     fontSize: 18,
@@ -78,9 +91,15 @@ const styles = StyleSheet.create({
   },
   sectionDescription: {
     marginTop: 8,
-    padding: 8,
+    paddingHorizontal: 30,
     fontSize: 14,
     fontWeight: '400',
+  },
+  sectionDate: {
+    marginTop: 8,
+    padding: 8,
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
 

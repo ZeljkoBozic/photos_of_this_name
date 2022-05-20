@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+
 const Contact = ({contact}) => {
   return (
     <View style={styles.contactCon}>
@@ -20,6 +21,7 @@ const Contact = ({contact}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   contactCon: {
     flex: 1,
@@ -53,4 +55,5 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 });
+
 export default Contact;

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Contacts from 'react-native-contacts';
 import Contact from './Contact';
 
-const ContactsList = () => {
+const ContactsList = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
   useEffect(() => {
     Contacts.getAll().then(contacts => {
@@ -14,7 +14,14 @@ const ContactsList = () => {
     return item?.recordID?.toString() || idx.toString();
   };
   const renderItem = ({item, index}) => {
-    return <Contact contact={item} />;
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('ImageList', {nameTag: item.givenName})
+        }>
+        <Contact contact={item} />
+      </TouchableOpacity>
+    );
   };
   return (
     <FlatList

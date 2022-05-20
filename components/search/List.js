@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// definition of the Item, which will be rendered in the FlatList
-
 const Item = props => {
   return (
     <View style={styles.item}>
@@ -23,12 +21,10 @@ const Item = props => {
   );
 };
 
-// the filter
 const List = props => {
   const {navigation} = props;
 
   const renderItem = ({item}) => {
-    // const onPress = (name) => { console.log('### press ', name)}
     // when no input, show all
 
     if (props.searchPhrase === '') {
@@ -40,7 +36,6 @@ const List = props => {
         />
       );
     }
-    x;
     if (
       item.givenName
         .toUpperCase()

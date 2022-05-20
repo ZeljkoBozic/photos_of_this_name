@@ -1,4 +1,3 @@
-// Home.js
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -7,28 +6,12 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Contacts from 'react-native-contacts';
-
-
 import List from "./List";
-import ContactsList from "../contacts/ContactsList"
 import SearchBar from "./SearchBar";
 
 const SearchView = ({navigation}) => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
-//   const [fakeData, setFakeData] = useState();
-
-  // get data from the fake api
-//   useEffect(() => {
-//     const getData = async () => {
-//       const apiResponse = await fetch(
-//         "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
-//       );
-//       const data = await apiResponse.json();
-//       setFakeData(data);
-//     };
-//     getData();
-//   }, []);
 
   const [contacts, setContacts] = useState([]);
 
