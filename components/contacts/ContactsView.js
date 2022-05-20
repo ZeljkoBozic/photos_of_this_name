@@ -1,30 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import ContactsList from './ContactsList';
-// import Contact from './contact';
 import Contacts from 'react-native-contacts';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const ContactsView = () => {
+const ContactsView = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     Contacts.getAll().then(contacts => {
-      console.log('### contacts ', contacts);
       setContacts(contacts);
     });
   }, []);
 
-  return <ContactsList />;
+  return <ContactsList navigation={navigation} />;
 };
 
 const styles = StyleSheet.create({});
