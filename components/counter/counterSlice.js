@@ -85,6 +85,8 @@ export const selectCount = (state) => state.counter.value;
 
 export const selectPhotos = (state) => state.counter.photos;
 
+export const selectStatusIndicator = (state) => state.counter.status
+
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount) => (dispatch, getState) => {
