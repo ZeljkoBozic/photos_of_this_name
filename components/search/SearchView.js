@@ -5,6 +5,10 @@ import List from './List';
 import SearchBar from './SearchBar';
 import PropTypes from 'prop-types';
 
+/**
+ * Main SearchView ( screen ) displaying SearchBar and List components and providing further navigation by selected contact name
+ */
+
 const SearchView = ({navigation}) => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);

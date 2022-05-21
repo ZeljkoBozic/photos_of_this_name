@@ -19,6 +19,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
+/**
+ * Root view ( screen ) for Photos of This Name App
+ * App provides possibility to pick Contact and fetch Flickr images tagged by Contact's name
+ */
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {

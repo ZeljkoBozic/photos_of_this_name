@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 });
 
 Contact.propTypes = {
-    contact: PropTypes.shape({ givenName: PropTypes.string}).isRequired,
-  };
+  contact: PropTypes.shape({givenName: PropTypes.string}).isRequired,
+};
 
 export default Contact;
