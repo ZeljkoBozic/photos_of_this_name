@@ -1,42 +1,72 @@
+# Photos of This Name
+
+## _React Native app for browsing Flickr images based on selected Contact_
+
+## Features
+
+-- ✨Runs on iOS ✨
+
+- Select Contact from device contact list
+- Select Contact trough Search filter
+- Display Flickr image results tagged by Contact name
+- Display additional image informations
+- Navigate to OS browser to diplay full-sized image
+## Installation
+
+PhotosOfThisName requires [Node.js](https://nodejs.org/) v10+ and [watchman] to run
+
+```sh
+cd PhotosOfThisName
+npm i
+pod install
+```
+## Starting project
+
+```sh
+cd PhotosOfThisName
+npx react-native start
+npx react-native run-ios
+```
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npx react-native start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs Metro bundler on port 8081. If another process is already using that port, you can either terminate that process, or change the port that the bundler uses.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npx react-native run-ios`
 
-### `npm test`
+Runs iOS app on default simulator. Application also can be launched from xCode by selecting desired simulator or device and triggering run UI control.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npx jest`
 
-### `npm run build`
+Launches the test runner.
+### `pod install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install iOS specific dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Possible setup issues and tested solutions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Issue with `react-native-vector-icons` on xCode, duplicate entries in build phase after auto linking (https://lifesaver.codes/answer/error-multiple-commands-produce-in-xcode-10).
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Dependency | README |
+| ------ | ------ |
+| react-native-contacts | [https://github.com/morenoh149/react-native-contacts] |
+| react-native-vector-icons | [https://github.com/oblador/react-native-vector-icons] |
+| prop-types | [https://www.npmjs.com/package/prop-types] |
+| react-redux | [https://react-redux.js.org/introduction/getting-started] |
+| react-navigation | [https://reactnavigation.org/docs/getting-started/] |
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
 To learn React, check out the [React documentation](https://reactjs.org/).
+To troubleshoot issues with Metro Bundler, check (https://reactnative.dev/docs/troubleshooting).
+To learn more about library `react-native-contacts`, check (https://github.com/morenoh149/react-native-contacts).
+
+## License
+
+MIT
