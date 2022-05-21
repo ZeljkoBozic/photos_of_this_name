@@ -3,28 +3,37 @@
  */
 
 import 'react-native';
-import React from 'react';
-import App from '../App';
 
 import counterReducer, {
-  increment,
-  // decrement,
-  // incrementByAmount,
+  getImages,
 } from '../components/counter/counterSlice';
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+describe('counterSlice', () => {
+  describe('counterReducer', () => {
+    const initialState = {status: 'idle', photos: []};
 
-it('renders correctly', () => {
-  renderer.create(<App />);
-});
+    it('sets status as pending when getImages is pending', () => {
+      const action = {type: getImages.pending.type};
+      const state = counterReducer(initialState, action);
+      expect(state).toEqual({status: 'loading', photos: []});
+    });
 
-const initialState = {
-  value: 3,
-  status: 'idle',
-};
+    it('sets the status and photos when getImages is fulfilled', () => {
+      const action = {
+        type: getImages.fulfilled.type,
+        payload: {photos: [{}, {}]},
+      };
+      const state = counterReducer(initialState, action);
+      expect(state).toEqual({status: 'idle', photos: {photos: [{}, {}]}});
+    });
 
-it('should handle increment', () => {
-  const actual = counterReducer(initialState, increment());
-  expect(actual.value).toEqual(4);
+    it('sets status idle when getImages is rejected', () => {
+      const action = {
+        type: getImages.rejected.type,
+        payload: {error: 'some error'},
+      };
+      const state = counterReducer(initialState, action);
+      expect(state).toEqual({status: 'idle', photos: []});
+    });
+  });
 });
