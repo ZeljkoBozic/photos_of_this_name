@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  ActivityIndicator,
-} from "react-native";
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, SafeAreaView, ActivityIndicator} from 'react-native';
 import Contacts from 'react-native-contacts';
-import List from "./List";
-import SearchBar from "./SearchBar";
+import List from './List';
+import SearchBar from './SearchBar';
+import PropTypes from 'prop-types';
 
 const SearchView = ({navigation}) => {
-  const [searchPhrase, setSearchPhrase] = useState("");
+  const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
 
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-        Contacts.getAll().then(contacts => {
-            console.log('### contacts ', contacts);
-            setContacts(contacts);
-          });
+    Contacts.getAll().then(contacts => {
+      setContacts(contacts);
+    });
   }, []);
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={styles.wrapper}>
       {!clicked && <Text style={styles.title}>Contacts</Text>}
 
       <SearchBar
@@ -35,32 +30,33 @@ const SearchView = ({navigation}) => {
       {!contacts ? (
         <ActivityIndicator size="large" />
       ) : (
-        
-          <List
-            searchPhrase={searchPhrase}
-            data={contacts}
-            setClicked={setClicked}
-            navigation = {navigation}
-          />
-        //   <ContactsList />
-        
+        <List
+          searchPhrase={searchPhrase}
+          data={contacts}
+          setClicked={setClicked}
+          navigation={navigation}
+        />
       )}
     </SafeAreaView>
   );
 };
 
-export default SearchView;
-
 const styles = StyleSheet.create({
-  root: {
-    justifyContent: "center",
-    alignItems: "center",
+  wrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    width: "100%",
+    width: '100%',
     marginTop: 20,
     fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: "10%",
+    fontWeight: '600',
+    marginLeft: '10%',
   },
 });
+
+SearchView.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export default SearchView;

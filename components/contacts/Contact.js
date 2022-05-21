@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 
 const Contact = ({contact}) => {
   return (
@@ -55,5 +56,9 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 });
+
+Contact.propTypes = {
+    contact: PropTypes.shape({ givenName: PropTypes.string}).isRequired,
+  };
 
 export default Contact;
