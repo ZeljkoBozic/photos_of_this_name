@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
+/**
+ * List and belonging Item components fro displaying Contacts trough Search
+ */
+
 const Item = props => {
   return (
     <View style={styles.item}>
@@ -26,8 +30,7 @@ const List = props => {
   const {navigation} = props;
 
   const renderItem = ({item}) => {
-    // when no input, show all
-
+    // If there is no input, we want to show all contacts
     if (props.searchPhrase === '') {
       return (
         <Item
@@ -50,7 +53,6 @@ const List = props => {
         />
       );
     }
-    // filter of the description
     if (
       item.familyName
         .toUpperCase()
@@ -83,23 +85,23 @@ const List = props => {
 };
 
 const styles = StyleSheet.create({
-    listContainer: {
-      width: '100%',
-    },
-    item: {
-      marginVertical: 10,
-      marginHorizontal: 20,
-    },
-    title: {
-      fontSize: 18,
-      marginBottom: 5,
-    },
-  });
+  listContainer: {
+    width: '100%',
+  },
+  item: {
+    marginVertical: 10,
+    marginHorizontal: 20,
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+});
 
 List.defaultProps = {
-    name: "",
-    familyName: "",
-  };
+  name: '',
+  familyName: '',
+};
 
 List.propTypes = {
   name: PropTypes.string,
