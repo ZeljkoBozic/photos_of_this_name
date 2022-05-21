@@ -15,7 +15,7 @@ import {
   getImages,
   selectPhotos,
   selectStatusIndicator,
-} from '../counter/counterSlice';
+} from '../../thunks/imagesSlice';
 
 const ImageListView = ({route}) => {
   const {nameTag} = route.params;

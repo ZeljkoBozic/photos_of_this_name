@@ -4,17 +4,17 @@
 
 import 'react-native';
 
-import counterReducer, {
+import imagesReducer, {
   getImages,
-} from '../components/counter/counterSlice';
+} from '../thunks/imagesSlice';
 
-describe('counterSlice', () => {
-  describe('counterReducer', () => {
+describe('imagesSlice', () => {
+  describe('imagesReducer', () => {
     const initialState = {status: 'idle', photos: []};
 
     it('sets status as pending when getImages is pending', () => {
       const action = {type: getImages.pending.type};
-      const state = counterReducer(initialState, action);
+      const state = imagesReducer(initialState, action);
       expect(state).toEqual({status: 'loading', photos: []});
     });
 
@@ -23,7 +23,7 @@ describe('counterSlice', () => {
         type: getImages.fulfilled.type,
         payload: {photos: [{}, {}]},
       };
-      const state = counterReducer(initialState, action);
+      const state = imagesReducer(initialState, action);
       expect(state).toEqual({status: 'idle', photos: {photos: [{}, {}]}});
     });
 
@@ -32,7 +32,7 @@ describe('counterSlice', () => {
         type: getImages.rejected.type,
         payload: {error: 'some error'},
       };
-      const state = counterReducer(initialState, action);
+      const state = imagesReducer(initialState, action);
       expect(state).toEqual({status: 'idle', photos: []});
     });
   });
