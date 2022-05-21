@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../components/counter/counterSlice';
+import imagesReducer from '../thunks/imagesSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    images: imagesReducer,
   },
 });
