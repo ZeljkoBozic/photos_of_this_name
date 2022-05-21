@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const Item = props => {
   return (
@@ -74,25 +75,35 @@ const List = props => {
         <FlatList
           data={props.data}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.recordID}
         />
       </View>
     </SafeAreaView>
   );
 };
 
-export default List;
-
 const styles = StyleSheet.create({
-  listContainer: {
-    width: '100%',
-  },
-  item: {
-    marginVertical: 10,
-    marginHorizontal: 20,
-  },
-  title: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-});
+    listContainer: {
+      width: '100%',
+    },
+    item: {
+      marginVertical: 10,
+      marginHorizontal: 20,
+    },
+    title: {
+      fontSize: 18,
+      marginBottom: 5,
+    },
+  });
+
+List.defaultProps = {
+    name: "",
+    familyName: "",
+  };
+
+List.propTypes = {
+  name: PropTypes.string,
+  familyName: PropTypes.string,
+};
+
+export default List;

@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   sectionDescription: {
     marginTop: 8,
     paddingHorizontal: 30,
+    paddingVertical: 15,
     fontSize: 14,
     fontWeight: '400',
   },

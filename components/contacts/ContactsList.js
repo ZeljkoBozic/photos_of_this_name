@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Contacts from 'react-native-contacts';
 import Contact from './Contact';
+import PropTypes from 'prop-types';
 
 const ContactsList = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
@@ -37,5 +38,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+ContactsList.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default ContactsList;

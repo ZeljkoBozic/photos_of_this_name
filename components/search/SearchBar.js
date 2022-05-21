@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, TextInput, View, Keyboard, Button} from 'react-native';
+import PropTypes from 'prop-types';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SearchBar = props => {
@@ -8,9 +10,7 @@ const SearchBar = props => {
     <View style={styles.container}>
       <View
         style={
-          !props.clicked
-            ? styles.searchBar__unclicked
-            : styles.searchBar__clicked
+          !props.clicked ? styles.searchBarUnclicked : styles.searchBarClicked
         }>
         {searchIcon}
         <TextInput
@@ -38,8 +38,6 @@ const SearchBar = props => {
   );
 };
 
-export default SearchBar;
-
 const styles = StyleSheet.create({
   container: {
     margin: 15,
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
   },
-  searchBar__unclicked: {
+  searchBarUnclicked: {
     padding: 10,
     flexDirection: 'row',
     width: '95%',
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: 'center',
   },
-  searchBar__clicked: {
+  searchBarClicked: {
     padding: 10,
     flexDirection: 'row',
     width: '80%',
@@ -71,3 +69,16 @@ const styles = StyleSheet.create({
     width: '90%',
   },
 });
+
+SearchBar.defaultProps = {
+  clicked: false,
+  setSearchPhrase: '',
+};
+
+SearchBar.propTypes = {
+  clicked: PropTypes.bool,
+  setSearchPhrase: PropTypes.string,
+  setClicked: PropTypes.func.isRequired,
+};
+
+export default SearchBar;
