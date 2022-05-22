@@ -60,7 +60,7 @@ const List = props => {
     ) {
       return (
         <Item
-          name={item.namgivenNamee}
+          name={item.givenName}
           familyName={item.familyName}
           navigation={navigation}
         />
