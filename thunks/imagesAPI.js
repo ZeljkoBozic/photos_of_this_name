@@ -5,7 +5,7 @@ export const getFlickrImages = async (searchTag, pageNumber) => {
     method: 'flickr.photos.search',
     api_key: apiKey,
     tags: searchTag,
-    sort: 'interestingness-desc',
+    sort: 'desc',
     per_page: 15,
     page: pageNumber,
     extras: 'owner_name, date_taken, description',

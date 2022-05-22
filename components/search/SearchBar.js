@@ -72,12 +72,11 @@ const styles = StyleSheet.create({
 
 SearchBar.defaultProps = {
   clicked: false,
-  setSearchPhrase: '',
 };
 
 SearchBar.propTypes = {
   clicked: PropTypes.bool,
-  setSearchPhrase: PropTypes.string,
+  setSearchPhrase: PropTypes.func.isRequired,
   setClicked: PropTypes.func.isRequired,
 };
 
